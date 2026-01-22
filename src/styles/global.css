@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Configuration du thème Tailwind v4 */
+@theme {
+  /* Couleurs Dark Mode */
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #121212;
+  --color-dark-border: #1e1e1e;
+
+  /* Couleurs Néon */
+  --color-neon-green: #39ff14;
+  --color-neon-blue: #00d4ff;
+  --color-neon-purple: #b026ff;
+
+  /* Glassmorphism */
+  --color-glass: rgba(255, 255, 255, 0.05);
+
+  /* Polices */
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-sans: "Space Grotesk", "Inter", sans-serif;
+
+  /* Ombres personnalisées */
+  --shadow-neon-green: 0 0 20px rgba(57, 255, 20, 0.5);
+  --shadow-neon-blue: 0 0 20px rgba(0, 212, 255, 0.5);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  /* Backdrop Blur */
+  --backdrop-blur-glass: 10px;
+}
+
+/* Animations personnalisées */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.8);
+  }
+}
+
+/* Utilitaires d'animation */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}

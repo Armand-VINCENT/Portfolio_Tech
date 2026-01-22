@@ -128,17 +128,20 @@ function Projects() {
       <div className="container mx-auto max-w-7xl px-4">
         <h2
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold mb-16 font-mono"
+          className="text-5xl md:text-7xl font-bold mb-24 font-mono"
         >
           <span className="text-neon-green">//</span> Projets
         </h2>
 
         {/* Grid régulière */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12"
+        >
           {projects.map((project) => (
             <div
               key={project.id}
-              className="group relative h-[400px] rounded-lg cursor-pointer overflow-hidden"
+              className="group relative h-[400px] rounded-lg cursor-pointer "
               style={{
                 transformStyle: "preserve-3d",
               }}
@@ -177,18 +180,18 @@ function Projects() {
 
                 {/* Contenu texte */}
                 <div className="relative h-full flex flex-col justify-end p-8 pl-10 z-10">
-                  <div className="space-y-2 max-w-[90%] p-3 group-hover:bg-neon-green transition-all duration-300 w-fit">
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-black transition-all duration-300 uppercase font-mono">
+                  <div className="space-y-2 max-w-[90%] p-3 ">
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-black transition-colors duration-300 uppercase font-mono group-hover:bg-neon-green w-fit">
                       {project.title}
                     </h3>
-                    <p className="text-gray-300 group-hover:text-black text-xs md:text-sm font-mono transition-all duration-300">
+                    <p className="text-gray-300 group-hover:text-black transition-colors duration-300 text-xs md:text-sm font-mono group-hover:bg-neon-green w-fit">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs font-mono bg-dark-bg/80 border border-neon-green/30 rounded text-neon-green backdrop-blur-sm group-hover:bg-neon-green group-hover:text-black group-hover:border-neon-green transition-all duration-300"
+                          className="px-3 py-1 text-xs font-mono bg-dark-bg/80 border border-neon-green/30 rounded text-neon-green group-hover:text-black backdrop-blur-sm transition-colors duration-300 group-hover:bg-neon-green w-fit"
                         >
                           {tech}
                         </span>

@@ -83,7 +83,7 @@ function Contact() {
       <div className="container mx-auto max-w-4xl px-4">
         <h2
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold mb-16 font-mono"
+          className="text-5xl md:text-7xl font-bold mb-24 font-mono"
         >
           <span className="text-neon-blue">//</span> Contact
         </h2>

@@ -74,7 +74,7 @@ function About() {
       <div className="container mx-auto max-w-6xl px-4">
         <h2
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold mb-16 font-mono"
+          className="text-5xl md:text-7xl font-bold mb-24 font-mono"
         >
           <span className="text-neon-blue">//</span> À propos
         </h2>
