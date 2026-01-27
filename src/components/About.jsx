@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useScrambleText } from "../hooks/useScrambleText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +9,8 @@ function About() {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const contentRef = useRef(null);
+  const [startScramble, setStartScramble] = useState(false);
+  const scrambledText = useScrambleText("À propos", 1500, startScramble);
 
   useEffect(() => {
     console.log("✅ [About] Section About montée avec ScrollTrigger");
@@ -27,6 +30,7 @@ function About() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
+          onEnter: () => setStartScramble(true),
         },
         x: 0,
         opacity: 1,
@@ -74,32 +78,59 @@ function About() {
       <div className="container mx-auto max-w-6xl px-4">
         <h2
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold mb-24 font-mono"
+          className="text-5xl md:text-7xl font-bold mb-24 font-mono cursor-pointer"
+          style={{ marginLeft: "1rem", marginTop: "2rem" }}
+          onMouseEnter={() => setStartScramble(false)}
+          onMouseLeave={() => setTimeout(() => setStartScramble(true), 50)}
         >
-          <span className="text-neon-blue">//</span> À propos
+          <span className="text-neon-blue">//</span> {scrambledText}
         </h2>
 
-        <div ref={contentRef} className="grid md:grid-cols-2 gap-12">
+        <div
+          ref={contentRef}
+          className="grid md:grid-cols-2 gap-12"
+          style={{ marginLeft: "1rem", marginTop: "2rem" }}
+        >
           <div className="glass p-10 md:p-12 rounded-lg">
-            <h3 className="text-2xl font-bold mb-6 text-neon-green">
+            <h3
+              className="text-2xl font-bold mb-6 text-neon-green"
+              style={{ marginLeft: "1rem", marginTop: "1rem" }}
+            >
               Qui suis-je ?
             </h3>
-            <p className="text-gray-300 leading-relaxed mb-4">
+            <p
+              className="text-gray-300 leading-relaxed mb-4"
+              style={{ marginLeft: "1.5rem", marginTop: "1rem" }}
+            >
               Développeur passionné par la création d'expériences web immersives
               et innovantes. Je combine design moderne et technologies de pointe
               pour donner vie à des interfaces uniques et captivantes.
             </p>
-            <p className="text-gray-300 leading-relaxed">
+            <p
+              className="text-gray-300 leading-relaxed"
+              style={{ marginLeft: "1.5rem", marginTop: "1rem" }}
+            >
               Spécialisé dans le développement front-end avec une expertise en
               animations 3D, WebGL et design interactif.
             </p>
           </div>
 
           <div className="glass p-10 md:p-12 rounded-lg">
-            <h3 className="text-2xl font-bold mb-6 text-neon-blue">
+            <h3
+              className="text-2xl font-bold mb-6 text-neon-blue"
+              style={{ marginLeft: "1rem", marginTop: "2rem" }}
+            >
               Compétences
             </h3>
-            <div className="space-y-4">
+            <div
+              className="space-y-4"
+              style={{
+                marginLeft: "1rem",
+                marginTop: "2rem",
+                marginRight: "1rem",
+                marginBottom: "1rem",
+              }}
+            >
               {skills.map((skill) => (
                 <div key={skill.name}>
                   <div className="flex justify-between mb-2">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useScrambleText } from "../hooks/useScrambleText";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,6 +9,8 @@ function Contact() {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const formRef = useRef(null);
+  const [startScramble, setStartScramble] = useState(false);
+  const scrambledText = useScrambleText("Contact", 1500, startScramble);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,6 +35,7 @@ function Contact() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
+          onEnter: () => setStartScramble(true),
         },
         x: 0,
         opacity: 1,
@@ -83,17 +87,35 @@ function Contact() {
       <div className="container mx-auto max-w-4xl px-4">
         <h2
           ref={titleRef}
-          className="text-5xl md:text-7xl font-bold mb-24 font-mono"
+          className="text-5xl md:text-7xl font-bold mb-24 font-mono cursor-pointer"
+          style={{ marginLeft: "1rem", marginTop: "2rem" }}
+          onMouseEnter={() => setStartScramble(false)}
+          onMouseLeave={() => setTimeout(() => setStartScramble(true), 50)}
         >
-          <span className="text-neon-blue">//</span> Contact
+          <span className="text-neon-blue">//</span> {scrambledText}
         </h2>
 
-        <div ref={formRef} className="glass p-8 md:p-12 lg:p-16 rounded-lg">
-          <p className="text-xl text-gray-300 mb-8">
+        <div
+          style={{ marginLeft: "1rem", marginTop: "2rem" }}
+          ref={formRef}
+          className="glass p-8 md:p-12 lg:p-16 rounded-lg"
+        >
+          <p
+            style={{ marginLeft: "1rem", marginTop: "2rem" }}
+            className="text-xl text-gray-300 mb-8"
+          >
             Vous avez un projet en tête ? Discutons-en !
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form
+            style={{
+              marginLeft: "1rem",
+              marginTop: "2rem",
+              marginRight: "1rem",
+            }}
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
             <div>
               <label className="block font-mono text-sm text-gray-400 mb-2">
                 Nom
@@ -137,6 +159,7 @@ function Contact() {
             </div>
 
             <button
+              style={{ marginTop: "2rem" }}
               type="submit"
               className="group relative w-full py-4 font-mono font-bold text-lg overflow-hidden"
             >
@@ -149,8 +172,11 @@ function Contact() {
             </button>
           </form>
 
-          <div className="mt-12 pt-8 border-t border-dark-border">
-            <div className="flex justify-center space-x-6">
+          <div
+            className="mt-12 pt-8 border-t border-dark-border"
+            style={{ marginLeft: "1rem", marginTop: "2rem" }}
+          >
+            <div className="flex justify-center gap-3 space-x-6">
               <a
                 href="#"
                 className="text-gray-400 hover:text-neon-green transition-colors duration-300 font-mono"
