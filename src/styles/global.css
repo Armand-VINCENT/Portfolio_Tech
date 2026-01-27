@@ -62,6 +62,18 @@
   }
 }
 
+@keyframes snake {
+  to {
+    stroke-dashoffset: -312;
+  }
+}
+
+@keyframes snake-slow {
+  to {
+    stroke-dashoffset: -504;
+  }
+}
+
 /* Utilitaires d'animation */
 .animate-float {
   animation: float 6s ease-in-out infinite;
@@ -69,4 +81,17 @@
 
 .animate-glow {
   animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Snake stroke animations */
+.snake-stroke {
+  stroke-dasharray: 78 234;
+  stroke-dashoffset: 0;
+  animation: snake 4s linear infinite;
+}
+
+.snake-stroke-slow {
+  stroke-dasharray: 126 378;
+  stroke-dashoffset: 0;
+  animation: snake-slow 6s linear infinite;
 }

@@ -425,7 +425,6 @@ function Projects() {
             marginBottom: "2rem",
             marginLeft: "1rem",
             marginTop: "2rem",
-            perspective: "1500px",
           }}
           ref={gridRef}
           className=" grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12"
@@ -436,9 +435,12 @@ function Projects() {
               className="group relative h-[400px] rounded-lg cursor-pointer"
               style={{
                 transformStyle: "preserve-3d",
+                perspective: "1000px",
                 zIndex: hoveredCard === project.id ? 50 : 1,
                 transition: "z-index 0s",
                 willChange: "transform",
+                transform: "translateZ(0)",
+                isolation: "isolate",
               }}
               onMouseMove={(e) => handleMouseMove(e, project.id)}
               onMouseLeave={handleMouseLeave}

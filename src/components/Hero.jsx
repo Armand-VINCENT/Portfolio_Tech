@@ -71,11 +71,11 @@ function Hero() {
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
         <h1 ref={titleRef} className="text-6xl md:text-8xl font-bold mb-6">
           <div className="overflow-hidden">
-            <span className="inline-block text-white">Développeur</span>
+            <span className="inline-block text-white">Armand VINCENT</span>
           </div>
           <div className="overflow-hidden">
             <span className="inline-block text-neon-green neon-text">
-              Tech-Futuriste
+              Freelance
             </span>
           </div>
         </h1>
@@ -102,12 +102,37 @@ function Hero() {
         </div>
       </div>
 
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-20 h-20 border border-neon-blue opacity-20 animate-float"></div>
-      <div
-        className="absolute bottom-1/4 right-10 w-32 h-32 border border-neon-green opacity-20 animate-float"
-        style={{ animationDelay: "1s" }}
-      ></div>
+      {/* Decorative elements with snake animation */}
+      <svg
+        className="absolute top-1/4 left-10 w-20 h-20 animate-float"
+        style={{ opacity: 0.3 }}
+      >
+        <rect
+          x="1"
+          y="1"
+          width="78"
+          height="78"
+          fill="none"
+          stroke="#00d4ff"
+          strokeWidth="2"
+          className="snake-stroke"
+        />
+      </svg>
+      <svg
+        className="absolute bottom-1/4 right-10 w-32 h-32 animate-float"
+        style={{ animationDelay: "1s", opacity: 0.3 }}
+      >
+        <rect
+          x="1"
+          y="1"
+          width="126"
+          height="126"
+          fill="none"
+          stroke="#39ff14"
+          strokeWidth="2"
+          className="snake-stroke-slow"
+        />
+      </svg>
     </section>
   );
 }
