@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Fichiers volumineux
+*.pdf
+public/VINCENT_ARMAND_HIERO.pdf
