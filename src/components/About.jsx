@@ -3,6 +3,21 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useScrambleText } from "../hooks/useScrambleText";
 
+// Import des icônes
+import IconAfterEffect from "../assets/icons/IconAfterEffect.svg";
+import IconBlender from "../assets/icons/IconBlender.svg";
+import IconCSS from "../assets/icons/IconCSS.svg";
+import IconFigma from "../assets/icons/IconFigma.svg";
+import IconHTML from "../assets/icons/IconHTML.svg";
+import IconIllustrator from "../assets/icons/IconIllustrator.svg";
+import IconIndesign from "../assets/icons/IconIndesign.svg";
+import IconJS from "../assets/icons/IconJS.svg";
+import IconPhotoshop from "../assets/icons/IconPhotoshop.svg";
+import IconPremierPro from "../assets/icons/IconPremierPro.svg";
+import IconSass from "../assets/icons/IconSass.svg";
+import IconTailwind from "../assets/icons/IconTailwind.svg";
+import IconVisualCode from "../assets/icons/IconVisualCode.svg";
+
 gsap.registerPlugin(ScrollTrigger);
 
 function About() {
@@ -101,7 +116,11 @@ function About() {
             </p>
             <p
               className="text-gray-300 leading-relaxed"
-              style={{ marginLeft: "1.5rem", marginTop: "1rem" }}
+              style={{
+                marginLeft: "1.5rem",
+                marginTop: "1rem",
+                marginBottom: "3rem",
+              }}
             >
               Passionné par le design et le développement web, j'aime relever
               des défis créatifs et construire des interfaces modernes qui
@@ -118,7 +137,11 @@ function About() {
             </h3>
             <div
               className="flex flex-wrap gap-4"
-              style={{ marginLeft: "1.5rem", marginTop: "1rem" }}
+              style={{
+                marginLeft: "1.5rem",
+                marginTop: "1rem",
+                marginBottom: "3rem",
+              }}
             >
               {["UX/UI Design", "Motion Design", "Développement", "Esport"].map(
                 (passion, index) => (
@@ -130,6 +153,68 @@ function About() {
                   </span>
                 ),
               )}
+            </div>
+          </div>
+
+          <div className="glass p-10 md:p-12 rounded-lg mt-12">
+            <h3
+              className="text-2xl font-bold mb-8 text-neon-green"
+              style={{ marginLeft: "1rem", marginTop: "1rem" }}
+            >
+              Outils & Technologies
+            </h3>
+            <div
+              className="flex flex-wrap justify-center items-center gap-6 md:gap-8"
+              style={{
+                marginLeft: "1rem",
+                marginRight: "1rem",
+                marginTop: "2rem",
+                marginBottom: "3rem",
+              }}
+            >
+              {[
+                { icon: IconHTML, name: "HTML", size: "w-14 h-14" },
+                { icon: IconCSS, name: "CSS", size: "w-14 h-14" },
+                { icon: IconJS, name: "JavaScript", size: "w-14 h-14" },
+                { icon: IconSass, name: "Sass", size: "w-14 h-14" },
+                { icon: IconTailwind, name: "Tailwind", size: "w-14 h-14" },
+                { icon: IconFigma, name: "Figma", size: "w-14 h-14" },
+                { icon: IconPhotoshop, name: "Photoshop", size: "w-14 h-14" },
+                {
+                  icon: IconIllustrator,
+                  name: "Illustrator",
+                  size: "w-14 h-14",
+                },
+                { icon: IconIndesign, name: "Indesign", size: "w-14 h-14" },
+                {
+                  icon: IconAfterEffect,
+                  name: "After Effects",
+                  size: "w-14 h-14",
+                },
+                {
+                  icon: IconPremierPro,
+                  name: "Premiere Pro",
+                  size: "w-14 h-14",
+                },
+                { icon: IconBlender, name: "Blender", size: "w-14 h-14" },
+                { icon: IconVisualCode, name: "VS Code", size: "w-14 h-14" },
+              ].map((tool, index) => (
+                <div
+                  key={index}
+                  className="group relative transition-all duration-300 hover:scale-110 cursor-pointer"
+                >
+                  <img
+                    src={tool.icon}
+                    alt={tool.name}
+                    className={`${tool.size} filter hover:drop-shadow-[0_0_15px_rgba(57,255,20,0.6)] transition-all duration-300`}
+                  />
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                    <span className="text-xs font-mono text-neon-green bg-dark-bg px-2 py-1 rounded border border-neon-green">
+                      {tool.name}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
@@ -175,7 +260,7 @@ function About() {
                 LinkedIn
               </a>
               <a
-                href="/CV_ArmandVINCENT.pdf"
+                href="./CV_ArmandVINCENT.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-dark-bg border-2 border-neon-purple text-neon-purple font-mono text-sm rounded-lg hover:bg-neon-purple hover:text-dark-bg transition-all duration-300 hover:shadow-neon-purple flex items-center gap-2"
@@ -205,7 +290,10 @@ function About() {
             >
               Parcours
             </h3>
-            <div className="relative px-4 md:px-8">
+            <div
+              className="relative px-4 md:px-8"
+              style={{ marginBottom: "3rem" }}
+            >
               {/* Ligne verticale centrale */}
               <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-neon-blue opacity-30 transform -translate-x-1/2"></div>
 
