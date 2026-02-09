@@ -115,7 +115,12 @@ function Projects() {
         "UI/UX",
       ],
       tech: ["Figma", "UI/UX", "Prototyping"],
-      tags: ["UI/UX Design", "Mobile App", "Prototype"],
+      tags: [
+        "Tech & Innovation",
+        "Art & Design",
+        "Digital Experience",
+        "UI/UX",
+      ],
       color: "neon-purple",
       image: "./images/SmashApp.png",
       client: "Projet Universitaire",
@@ -143,7 +148,13 @@ function Projects() {
         "Création d'identité",
       ],
       tech: ["Illustrator", "Photoshop", "Figma"],
-      tags: ["UI/UX Design", "Charte Graphique", "Prototype"],
+      tags: [
+        "Art & Design",
+        "Multimedia",
+        "Digital Experience",
+        "UI/UX",
+        "Création d'identité",
+      ],
       color: "neon-blue",
       image: "./images/BarIllusion.png",
       client: "Projet Universitaire",
@@ -170,7 +181,7 @@ function Projects() {
       subtitle: "Projet de développement personnel",
       category: ["Art & Design", "UI/UX"],
       tech: ["Figma", "UI/UX", "Game Design"],
-      tags: ["UI/UX Design", "Prototype", "Projet Personnel"],
+      tags: ["Art & Design", "UI/UX"],
       color: "neon-green",
       image: "./images/MHW.png",
       client: "Projet Personnel",
@@ -191,7 +202,7 @@ function Projects() {
       subtitle: "Site web one page",
       category: ["Art & Design", "UI/UX", "Création d'identité"],
       tech: ["Figma", "Web Design", "UI/UX"],
-      tags: ["UI/UX Design", "Prototype", "One Page"],
+      tags: ["Art & Design", "UI/UX", "Création d'identité"],
       color: "neon-purple",
       image: "./images/OliveOil.png",
       client: "Projet Universitaire",
@@ -212,7 +223,7 @@ function Projects() {
       subtitle: "Design graphique promotionnel",
       category: "Art & Design",
       tech: ["Photoshop", "Graphic Design", "Digital Painting"],
-      tags: ["Flyers", "Digital Painting", "Photoshop"],
+      tags: ["Art & Design"],
       color: "neon-green",
       image: "./images/HieroBig.png",
       images: [
@@ -237,7 +248,7 @@ function Projects() {
       subtitle: "Identité visuelle et trailer",
       category: ["Art & Design", "Création d'identité"],
       tech: ["Illustrator", "After Effects", "Motion Design"],
-      tags: ["Logo Design", "Association", "Trailer"],
+      tags: ["Art & Design", "Création d'identité"],
       color: "neon-blue",
       image: "./images/SLLBig.png",
       images: [
@@ -262,7 +273,7 @@ function Projects() {
       subtitle: "Exploration graphique personnelle",
       category: "Art & Design",
       tech: ["Photoshop", "Graphic Design", "Brutalism"],
-      tags: ["Poster", "Brutalisme", "Photoshop"],
+      tags: ["Art & Design"],
       color: "neon-purple",
       image: "./images/ChainsawmanBig.png",
       images: ["./images/PosterChainsawMan.png"],
@@ -282,7 +293,7 @@ function Projects() {
       subtitle: "Cadeau personnalisé",
       category: "Art & Design",
       tech: ["Photoshop", "Digital Painting", "Illustration"],
-      tags: ["Illustration", "Digital Painting", "Photoshop"],
+      tags: ["Art & Design"],
       color: "neon-green",
       image: "./images/SmashDraw.JPEG",
       client: "Projet Personnel",
@@ -301,7 +312,7 @@ function Projects() {
       subtitle: "Chronologie visuelle du design",
       category: ["Art & Design", "UI/UX", "Multimedia"],
       tech: ["Illustrator", "Graphic Design", "Layout"],
-      tags: ["Illustrator", "Mise en page", "Prototype"],
+      tags: ["Art & Design", "UI/UX", "Multimedia"],
       color: "neon-blue",
       image: "./images/FriseChronoDesign.png",
       client: "Projet Universitaire",
@@ -322,7 +333,7 @@ function Projects() {
       subtitle: "Valorisation des métiers artisanaux",
       category: "Art & Design",
       tech: ["Illustrator", "Illustration", "Character Design"],
-      tags: ["Illustrator", "Céramique", "Personnages"],
+      tags: ["Art & Design"],
       color: "neon-purple",
       image: "./images/IlluCéramiqueBig.png",
       client: "Projet Personnel",
@@ -341,7 +352,7 @@ function Projects() {
       subtitle: "Réinterprétation graphique",
       category: "Art & Design",
       tech: ["Illustrator", "Illustration", "Vector Art"],
-      tags: ["Illustrator", "Batiment", "Couleurs"],
+      tags: ["Art & Design"],
       color: "neon-green",
       image: "./images/Iut1.png",
       images: ["./images/Iut2.png", "./images/Iut3.png", "./images/Iut4.png"],
@@ -362,7 +373,7 @@ function Projects() {
       subtitle: "Développement web Astro",
       category: "Tech & Innovation",
       tech: ["Astro", "HTML", "CSS"],
-      tags: ["UI/UX Design", "Mobile App", "Prototype"],
+      tags: ["Tech & Innovation"],
       color: "neon-blue",
       image: "./images/PricingCard.png",
       client: "Projet Scolaire",
@@ -382,7 +393,7 @@ function Projects() {
       subtitle: "Data visualization interactive",
       category: ["Tech & Innovation", "Art & Design", "Digital Experience"],
       tech: ["HTML", "CSS", "JavaScript"],
-      tags: ["UI/UX Design", "Mobile App", "Prototype"],
+      tags: ["Tech & Innovation", "Art & Design", "Digital Experience"],
       color: "neon-purple",
       image: "./images/SiteBob.png",
       client: "Projet Universitaire",
@@ -402,7 +413,7 @@ function Projects() {
       subtitle: "Expérience VR immersive",
       category: ["VR/AR/XR", "Tech & Innovation"],
       tech: ["aFrame", "HTML", "JavaScript"],
-      tags: ["HTML/CSS/JS", "aFrame", "Réalité Virtuelle"],
+      tags: ["VR/AR/XR", "Tech & Innovation"],
       color: "neon-green",
       image: "./images/Scene3D.png",
       client: "Projet Personnel",
@@ -422,7 +433,7 @@ function Projects() {
       subtitle: "Initiation au motion design",
       category: ["Art & Design", "Multimedia", "Motion Design"],
       tech: ["After Effects", "Illustrator", "Animation"],
-      tags: ["Illustration", "Paysage", "Motion Design"],
+      tags: ["Art & Design", "Multimedia", "Motion Design"],
       color: "neon-blue",
       image: "./images/Motion1.png",
       client: "Projet de Formation",
@@ -442,7 +453,7 @@ function Projects() {
       subtitle: "Animation loop satisfaisante",
       category: ["Art & Design", "Multimedia", "Motion Design"],
       tech: ["After Effects", "Animation", "Motion Design"],
-      tags: ["Boucle", "Profondeur", "Satisfaisant"],
+      tags: ["Art & Design", "Multimedia", "Motion Design"],
       color: "neon-purple",
       image: "./images/Motion2.png",
       client: "Projet Personnel",
@@ -462,7 +473,7 @@ function Projects() {
       subtitle: "Animation spatiale immersive",
       category: ["Art & Design", "Multimedia", "Motion Design"],
       tech: ["After Effects", "Animation", "Audio Sync"],
-      tags: ["Morphing", "Synchro Audio", "Motion Design"],
+      tags: ["Art & Design", "Multimedia", "Motion Design"],
       color: "neon-green",
       image: "./images/Motion3.png",
       client: "Projet Personnel",
@@ -480,7 +491,14 @@ function Projects() {
   const filteredProjects =
     selectedCategory === "All"
       ? projects
-      : projects.filter((project) => project.category === selectedCategory);
+      : projects.filter((project) => {
+          // Si category est un tableau
+          if (Array.isArray(project.category)) {
+            return project.category.includes(selectedCategory);
+          }
+          // Si category est une string
+          return project.category === selectedCategory;
+        });
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);

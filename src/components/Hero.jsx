@@ -1,138 +1,149 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import WebGLBackground from "./WebGLBackground";
 
 function Hero() {
-  const titleRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
+  const [flippedTiles, setFlippedTiles] = useState(new Set());
+  const gridRef = useRef(null);
+  const timeoutsRef = useRef({});
+
+  // Grille 4 colonnes x 5 lignes = 20 rectangles
+  const gridSize = { cols: 4, rows: 5 };
+  const totalTiles = gridSize.cols * gridSize.rows;
 
   useEffect(() => {
-    console.log("✅ [Hero] Section Hero montée, démarrage des animations");
-
-    if (!titleRef.current || !subtitleRef.current || !ctaRef.current) {
-      console.warn("⚠️ [Hero] Refs non disponibles");
-      return;
+    // Animation d'entrée des tiles
+    if (gridRef.current) {
+      gsap.fromTo(
+        gridRef.current.children,
+        {
+          opacity: 0,
+          scale: 0.8,
+        },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: {
+            amount: 1,
+            from: "random",
+          },
+          ease: "power2.out",
+        },
+      );
     }
 
-    const tl = gsap.timeline({ delay: 1 });
-
-    tl.fromTo(
-      titleRef.current.children,
-      {
-        y: 100,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        clearProps: "all",
-      },
-    )
-      .fromTo(
-        subtitleRef.current,
-        {
-          y: 30,
-          opacity: 0,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          clearProps: "all",
-        },
-        "-=0.5",
-      )
-      .fromTo(
-        ctaRef.current,
-        {
-          scale: 0.8,
-          opacity: 0,
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          clearProps: "all",
-        },
-        "-=0.3",
-      );
+    // Cleanup des timeouts au démontage
+    return () => {
+      Object.values(timeoutsRef.current).forEach(clearTimeout);
+    };
   }, []);
 
+  // Fonction pour obtenir les indices des tuiles adjacentes (rayon 1)
+  const getAdjacentTiles = (index) => {
+    const row = Math.floor(index / gridSize.cols);
+    const col = index % gridSize.cols;
+    const adjacent = [];
+
+    for (let r = row - 1; r <= row + 1; r++) {
+      for (let c = col - 1; c <= col + 1; c++) {
+        if (
+          r >= 0 &&
+          r < gridSize.rows &&
+          c >= 0 &&
+          c < gridSize.cols &&
+          !(r === row && c === col)
+        ) {
+          adjacent.push(r * gridSize.cols + c);
+        }
+      }
+    }
+
+    return adjacent;
+  };
+
+  const handleTileHover = (index) => {
+    // Annuler les timeouts de sortie pour cette tuile et ses voisines
+    const tilesToFlip = [index, ...getAdjacentTiles(index)];
+    tilesToFlip.forEach((tileIndex) => {
+      if (timeoutsRef.current[`leave-${tileIndex}`]) {
+        clearTimeout(timeoutsRef.current[`leave-${tileIndex}`]);
+        delete timeoutsRef.current[`leave-${tileIndex}`];
+      }
+    });
+
+    // Flip la tuile principale immédiatement
+    setFlippedTiles((prev) => new Set([...prev, index]));
+
+    // Flip les tuiles adjacentes avec un léger délai
+    getAdjacentTiles(index).forEach((adjacentIndex, i) => {
+      timeoutsRef.current[`enter-${adjacentIndex}`] = setTimeout(
+        () => {
+          setFlippedTiles((prev) => new Set([...prev, adjacentIndex]));
+        },
+        50 + i * 30,
+      ); // Délai progressif pour effet de cascade
+    });
+  };
+
+  const handleTileLeave = (index) => {
+    const tilesToUnflip = [index, ...getAdjacentTiles(index)];
+
+    // Retourner les tuiles après un délai
+    tilesToUnflip.forEach((tileIndex, i) => {
+      timeoutsRef.current[`leave-${tileIndex}`] = setTimeout(
+        () => {
+          setFlippedTiles((prev) => {
+            const newSet = new Set(prev);
+            newSet.delete(tileIndex);
+            return newSet;
+          });
+        },
+        800 + i * 30,
+      ); // Reste retournée 800ms puis cascade
+    });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 md:px-12 lg:px-16">
-      <WebGLBackground />
-
-      <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        <h1 ref={titleRef} className="text-6xl md:text-8xl font-bold mb-6">
-          <div className="overflow-hidden">
-            <span className="inline-block text-white">Armand VINCENT</span>
-          </div>
-          <div className="overflow-hidden">
-            <span className="inline-block text-neon-green neon-text">
-              Freelance
-            </span>
-          </div>
-        </h1>
-
-        <p
-          ref={subtitleRef}
-          className="font-mono text-xl md:text-2xl text-gray-400 mb-12 max-w-2xl mx-auto"
-        >
-          Créateur d'expériences numériques immersives
-          <span className="text-neon-blue animate-pulse">_</span>
-        </p>
-
-        <div ref={ctaRef}>
-          <a
-            href="#projets"
-            className="group relative inline-block px-8 py-4 font-mono font-bold text-lg overflow-hidden"
+    <section className="relative min-h-screen w-full overflow-hidden bg-dark-bg">
+      {/* Grille de rectangles */}
+      <div
+        ref={gridRef}
+        className="grid w-full h-screen gap-2 p-2"
+        style={{
+          gridTemplateColumns: `repeat(${gridSize.cols}, 1fr)`,
+          gridTemplateRows: `repeat(${gridSize.rows}, 1fr)`,
+        }}
+      >
+        {Array.from({ length: totalTiles }).map((_, index) => (
+          <div
+            key={index}
+            className="flip-tile-container"
+            onMouseEnter={() => handleTileHover(index)}
+            onMouseLeave={() => handleTileLeave(index)}
           >
-            <span className="absolute inset-0 bg-linear-to-r from-neon-green to-neon-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="absolute inset-0 border-2 border-neon-green group-hover:border-transparent transition-colors duration-300"></span>
-            <span className="relative z-10 text-white group-hover:text-black transition-colors duration-300">
-              Découvrir mes projets
-            </span>
-          </a>
-        </div>
+            <div
+              className={`flip-tile ${flippedTiles.has(index) ? "flipped" : ""}`}
+            >
+              {/* Face avant (gris) */}
+              <div className="flip-tile-face flip-tile-front bg-gray-700 border border-gray-600"></div>
+              {/* Face arrière (vert) */}
+              <div className="flip-tile-face flip-tile-back bg-neon-green border border-neon-green"></div>
+            </div>
+          </div>
+        ))}
       </div>
 
-      {/* Decorative elements with snake animation */}
-      <svg
-        className="absolute top-1/4 left-10 w-20 h-20 animate-float"
-        style={{ opacity: 0.3 }}
-      >
-        <rect
-          x="1"
-          y="1"
-          width="78"
-          height="78"
-          fill="none"
-          stroke="#00d4ff"
-          strokeWidth="2"
-          className="snake-stroke"
-        />
-      </svg>
-      <svg
-        className="absolute bottom-1/4 right-10 w-32 h-32 animate-float"
-        style={{ animationDelay: "1s", opacity: 0.3 }}
-      >
-        <rect
-          x="1"
-          y="1"
-          width="126"
-          height="126"
-          fill="none"
-          stroke="#39ff14"
-          strokeWidth="2"
-          className="snake-stroke-slow"
-        />
-      </svg>
+      {/* Texte central */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+        <h1 className="text-4xl md:text-6xl lg:text-8xl font-bold text-center px-6">
+          <div className="text-white font-mono uppercase tracking-wider mb-2">
+            Portfolio
+          </div>
+          <div className="text-white font-mono uppercase tracking-wide">
+            ARMAND VINCENT
+          </div>
+        </h1>
+      </div>
     </section>
   );
 }

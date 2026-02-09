@@ -16,7 +16,14 @@ function CircularFilter({
   // Compter les projets par catégorie
   const countByCategory = (category) => {
     if (category === "All") return projects.length;
-    return projects.filter((p) => p.category === category).length;
+    return projects.filter((p) => {
+      // Si category est un tableau
+      if (Array.isArray(p.category)) {
+        return p.category.includes(category);
+      }
+      // Si category est une string
+      return p.category === category;
+    }).length;
   };
 
   useEffect(() => {

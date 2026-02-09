@@ -74,19 +74,19 @@ function ProjectModal({ project, isOpen, onClose }) {
   return (
     <div
       ref={modalRef}
-      className="fixed inset-0 z-50 flex items-center justify-center px-4"
+      className="fixed inset-0 z-50 flex items-start md:items-center justify-center px-4 overflow-y-auto py-4 md:py-0"
       style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
       onClick={handleClose}
     >
       <div
         ref={contentRef}
-        className="relative w-full max-w-6xl glass rounded-lg overflow-hidden"
+        className="relative w-full max-w-6xl glass rounded-lg overflow-hidden my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Bouton de fermeture */}
+        {/* Bouton de fermeture - Sticky sur mobile */}
         <button
           onClick={handleClose}
-          className="absolute top-6 left-6 z-10 w-12 h-12 rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green hover:text-black transition-all duration-300 flex items-center justify-center text-2xl font-bold"
+          className="sticky md:absolute top-0 md:top-6 left-0 md:left-6 z-10 w-12 h-12 rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green hover:text-black transition-all duration-300 flex items-center justify-center text-2xl font-bold bg-dark-bg md:bg-transparent m-4 md:m-0"
         >
           ×
         </button>
@@ -148,7 +148,7 @@ function ProjectModal({ project, isOpen, onClose }) {
 
           {/* Informations à droite */}
           <div
-            className="bg-dark-surface p-8 md:p-12 overflow-y-auto"
+            className="bg-dark-surface p-8 md:p-12 overflow-y-auto max-h-[70vh] md:max-h-none"
             style={{ marginLeft: "1rem" }}
           >
             <h2
