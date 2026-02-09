@@ -6,6 +6,7 @@ function ProjectModal({ project, isOpen, onClose }) {
   const contentRef = useRef(null);
   const gridRef = useRef(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   // Images du carousel (pour l'instant on utilise la même image, mais vous pouvez en ajouter plusieurs)
   const images = project?.images || [project?.image];
@@ -92,11 +93,11 @@ function ProjectModal({ project, isOpen, onClose }) {
 
         <div className="grid md:grid-cols-2 gap-0 min-h-[600px]">
           {/* Image/Vidéo à gauche */}
-          <div className="relative overflow-hidden bg-dark-bg">
+          <div className="relative overflow-hidden bg-dark-bg flex items-center justify-center">
             <img
               src={images[currentImageIndex]}
               alt={project.title}
-              className="w-full h-full object-cover transition-opacity duration-500"
+              className="w-full h-full object-contain transition-opacity duration-500"
             />
 
             {/* Grille de fond animée */}
@@ -282,9 +283,176 @@ function ProjectModal({ project, isOpen, onClose }) {
                 </table>
               </div>
             )}
+
+            {/* Boutons prototype, PDF, Live Site et Vidéo */}
+            <div className="mt-8 flex flex-wrap gap-4">
+              {project.prototypeLink && (
+                <a
+                  href={project.prototypeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-neon-green text-black font-mono font-bold rounded-lg hover:bg-neon-blue transition-colors duration-300 group"
+                >
+                  <span>Voir le prototype</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </a>
+              )}
+
+              {project.liveLink && (
+                <a
+                  href={project.liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-neon-blue text-black font-mono font-bold rounded-lg hover:bg-neon-green transition-colors duration-300 group"
+                >
+                  <span>Voir le site</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                    />
+                  </svg>
+                </a>
+              )}
+
+              {project.videoLink && (
+                <a
+                  href={project.videoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-red-600 text-white font-mono font-bold rounded-lg hover:bg-red-700 transition-colors duration-300 group"
+                >
+                  <span>Voir la vidéo</span>
+                  <svg
+                    className="w-5 h-5 group-hover:scale-110 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </a>
+              )}
+
+              {project.pdfLink && (
+                <a
+                  href={project.pdfLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-neon-purple text-white font-mono font-bold rounded-lg hover:bg-neon-blue transition-colors duration-300 group"
+                >
+                  <span>Télécharger PDF</span>
+                  <svg
+                    className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </a>
+              )}
+            </div>
+
+            {/* Galerie d'images supplémentaires */}
+            {project.galleryImages && project.galleryImages.length > 0 && (
+              <div className="mt-8">
+                <h3 className="text-neon-green text-sm font-mono mb-4">
+                  Galerie
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {project.galleryImages.map((img, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setLightboxImage(img)}
+                      className="relative group overflow-hidden rounded-lg border-2 border-gray-700 hover:border-neon-green transition-all duration-300 cursor-pointer"
+                    >
+                      <img
+                        src={img}
+                        alt={`${project.title} - Image ${index + 1}`}
+                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                      {/* Icône de zoom */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg
+                          className="w-12 h-12 text-neon-green"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
+
+      {/* Lightbox pour agrandir les images */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-[60] bg-black/95 flex items-center justify-center p-4"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            onClick={() => setLightboxImage(null)}
+            className="absolute top-6 right-6 w-12 h-12 rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green hover:text-black transition-all duration-300 flex items-center justify-center text-2xl font-bold z-10"
+          >
+            ×
+          </button>
+          <img
+            src={lightboxImage}
+            alt="Image agrandie"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }
